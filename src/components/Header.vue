@@ -1,0 +1,41 @@
+<template>
+  <div class="main_nav">
+      <div class="logo_box">
+          <div class="logo">
+              <img src="../assets/reel-it_logo.png" alt="Brand Logo" class="logo_img">
+          </div>
+      </div>
+      <Search/>
+  </div>
+</template>
+
+<script>
+import Search from '@/components/Search'
+export default {
+    name: 'Header',
+    components: {
+        Search
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+    .main_nav{
+        display: flex;
+
+        justify-content: space-between;
+        align-content: center;
+
+        .logo_box {
+            width: 100%;
+            margin-left: 2rem;
+        }
+
+        .logo{
+            img{
+                width: 20rem;
+            }
+        }
+    }
+
+</style>
