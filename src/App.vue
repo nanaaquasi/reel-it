@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <div class="container">
-      <router-view />
-    </div>
+    <router-view />
   </div>
 </template>
 
 <script>
 </script>
+
+<style src="vue-select/dist/vue-select.css"></style>
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,600,700,800,900&display=swap");
@@ -18,23 +18,22 @@
   --color-black: #000f27;
 }
 
-* {
-  &::before,
-  &::after {
-    box-sizing: inherit;
-    margin: 0;
-    padding: 0;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
 }
 
 html {
   font-size: 62.5%;
-  line-height: 1.8rem;
+  line-height: 1.5;
 }
 
 body {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   box-sizing: border-box;
   font-family: "Nunito", sans-serif;
   font-size: 1.6rem;
@@ -43,6 +42,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image: url(./assets/main_bg.png);
-  overflow: hidden;
+  background-repeat: no-repeat;
+  overflow-y: hidden;
 }
 </style>

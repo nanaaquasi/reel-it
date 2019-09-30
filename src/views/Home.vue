@@ -24,12 +24,12 @@ export default {
 
 <style lang="scss" scoped>
   .container {
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     display: grid;
 
-    grid-template-rows: auto 1fr auto;
-    grid-template-columns: 100%;
+    grid-template-rows: 8rem 1fr 8rem;
+    grid-template-columns: 1fr;
     grid-row-gap: 2rem;
   }
 </style>

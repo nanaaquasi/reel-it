@@ -39,42 +39,40 @@ export default {
 <style lang="scss" scoped>
 .movie {
   grid-column: 2/3;
+  // padding: 4rem;
 
   display: grid;
   grid-template-columns: min-content 1fr;
+  grid-column-gap: 1.2rem;
 
   &_poster {
     align-self: center;
 
     .image_box {
-      width: 100%;
 
       .poster {
-        width: 26.5rem;
+        width: 20rem;
       }
     }
   }
 
   &_info {
-    // background: green;
-    padding: 0.5rem 3rem;
     display: grid;
 
     grid-template-columns: 100%;
-    grid-template-rows: 2rem 1.5rem repeat(2, min-content);
-    grid-row-gap: 1.6rem;
+    grid-template-rows: min-content min-content max-content 1fr min-content;;
+    grid-row-gap: 1rem;
 
     &--title {
-      font-size: 2.4rem;
+      font-size: 1.6rem;
       font-weight: 700;
-      margin-top: 2.2rem;
 
       display: flex;
       align-content: center;
       align-items: center;
 
       .movie_year {
-        font-size: 2rem;
+        font-size: 1.6rem;
         font-weight: 500;
         align-self: center;
 
@@ -83,9 +81,8 @@ export default {
     }
 
     &--ratings {
-      font-size: 2.2rem;
+      font-size: 1.8rem;
       font-weight: 600;
-      margin-bottom: 3rem;
 
       .score {
         font-weight: 800;
@@ -94,28 +91,27 @@ export default {
     }
 
     &--details {
-      font-size: 2.2rem;
+      font-size: 1.6rem;
       align-self: center;
-      margin-top: 2rem;
 
-      p {
-        //    line-height: 2rem !important;
-      }
     }
 
     &--btn-actions {
+      align-self: center;
       display: flex;
+      // margin-top: 1rem;
 
       align-content: center;
 
       .btn {
-        padding: 1.5rem 3rem;
+        padding: 1.2rem 2rem;
         border: none;
         outline: none;
         font-family: inherit;
-        font-size: 2.4rem;
+        font-size: 1.6rem;
         font-weight: 700;
         border-radius: 50rem;
+        // margin-top: 2rem;
         cursor: pointer;
 
         &-primary {
@@ -133,7 +129,7 @@ export default {
           color: var(--main-text-color);
           border: 2px solid var(--color-primary);
 
-          margin-left: 1.8rem;
+          margin-left: 1rem;
         }
       }
     }

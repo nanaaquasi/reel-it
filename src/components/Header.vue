@@ -5,7 +5,7 @@
               <img src="../assets/reel-it_logo.png" alt="Brand Logo" class="logo_img">
           </div>
       </div>
-      <Search/>
+      <!-- <Search/> -->
   </div>
 </template>
 
@@ -28,12 +28,14 @@ export default {
 
         .logo_box {
             width: 100%;
+            height: 100%;
             margin-left: 2rem;
         }
 
         .logo{
             img{
-                width: 20rem;
+                width: 14rem;
+                height: 8rem;
             }
         }
     }

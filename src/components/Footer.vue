@@ -15,15 +15,15 @@ export default {
 
 <style lang="scss" scoped>
 .main_footer {
-  height: 4rem;
+  // height: 4rem;
   align-self: center;
   justify-self: center;
   // background: whitesmoke;
 
   .footer_text {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 600;
-    line-height: .7rem;
+    // line-height: 1;
 
     a {
       text-decoration: none !important;

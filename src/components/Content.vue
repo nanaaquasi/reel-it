@@ -8,57 +8,65 @@
       </p>
     </div>
     <div class="main_content wrapper--rounded">
-      <Filter />
+      <!-- <Filter /> -->
+      <MovieFilter />
       <MovieResult />
     </div>
   </section>
 </template>
 
 <script>
-import Filter from "@/components/Filter";
+// import Filter from "@/components/Filter";
 import MovieResult from "@/components/MovieResult";
+import MovieFilter from "@/components/MovieFilter";
+
 
 export default {
   name: "Content",
   components: {
-    Filter,
-    MovieResult
+    // Filter,
+    MovieResult,
+    MovieFilter
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .content {
-  //   background: white;
-  width: 80vw;
-  margin-bottom: 2rem;
-  //   height: 100%
+  max-width: 80vw;
+  margin-top: 3rem;
+  // margin: 4rem 0;
+  // margin-top: 2rem;
   align-self: center;
   justify-self: center;
-  display: grid;
 
-  grid-template-rows: 4rem 1fr;
+  display: grid;
+  grid-template-columns: 35rem 1fr;
+  grid-template-rows: 2rem 1fr;
 
   .heading {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
     align-self: center;
     justify-self: center;
+    margin-bottom: 6rem;
 
     // position: relative;
     display: flex;
 
     &_main {
-      font-size: 2.8rem;
+      font-size: 2rem;
       font-weight: 600;
-      //   margin-bottom: 4px;
+        // margin-bottom: 4px;
 
-      &::before {
-        content: url(../assets/puzzled.png);
-        align-self: center;
-        justify-self: center;
-        margin-top: 3px;
-        transform: scale(0.4);
-        // display: inline;
-      }
+      // &::before {
+      //   content: url(../assets/puzzled.png);
+      //   align-self: center;
+      //   justify-self: center;
+      //   margin-top: 3px;
+      //   transform: scale(0.4);
+      //   // display: inline;
+      // }
 
       .underline {
         position: relative;
@@ -86,19 +94,28 @@ export default {
   }
 
   .main_content {
-    width: 90%;
+    // max-width: 100%;
+    // max-height: 100%;
+    grid-row: 2 / 3;
+    grid-column: 1 / -1;
     // margin: auto;
     display: grid;
-    padding: 6rem;
+    padding: 4rem 2rem;
 
-    grid-template-columns: 50rem 1fr;
+    grid-template-columns: 40rem 1fr;
+    grid-template-rows: 100%;
+    grid-column-gap: 2rem;
 
-    margin-top: 4rem;
+    // margin-top: 4rem;
     background: linear-gradient(var(--color-black), var(--color-black)),
       linear-gradient(to right, rgb(255, 74, 74), purple);
     border: 5px solid transparent;
     background-repeat: no-repeat;
     background-origin: padding-box, border-box;
+
+    // .full {
+    //   grid-column: 1 /2;
+    // }
   }
 
   .wrapper--rounded {

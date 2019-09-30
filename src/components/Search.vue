@@ -20,7 +20,7 @@ export default {
 
   .search_input {
     width: 35rem;
-    padding: 1.5rem 4rem;
+    padding: 1rem 2rem;
     margin-right: 13rem;
     outline: none;
     background: transparent;
