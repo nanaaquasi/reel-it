@@ -1,45 +1,143 @@
 <template>
-  <section class="movie">
-    <div class="movie_poster">
-      <div class="image_box">
-        <img src="../assets/poster.jpg" alt class="poster" />
+  <section class="result">
+    <div class="movie" v-if="!loadingStatus">
+      <div class="movie_poster">
+        <div class="image_box">
+          <img
+            v-bind:src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`"
+            alt="Movie Poster"
+            class="poster"
+          />
+        </div>
+      </div>
+      <div class="movie_info">
+        <div class="movie_info--title">
+          <h2>
+            {{movie.title}}
+            <span class="movie_year">( {{movie.release_date.split('-')[0]}} )</span>
+          </h2>
+        </div>
+        <div class="movie_info--ratings">
+          <p>
+            Total Score
+            <span class="score">{{movie.vote_average}}</span>
+            Fantasy/Mystery | {{movie.runtime}} mins
+          </p>
+        </div>
+        <div class="movie_info--details">
+          <p class="plot">{{movie.overview}}</p>
+        </div>
+        <div class="movie_info--btn-actions">
+          <button class="btn btn-primary">Watch Now</button>
+          <button class="btn btn-secondary" @click.prevent="onClick(movie.id)">More info</button>
+        </div>
       </div>
     </div>
-    <div class="movie_info">
-      <div class="movie_info--title">
-        <h2>Blade Runner 2049</h2>
-        <h3 class="movie_year">( 2017 )</h3>
-      </div>
-      <div class="movie_info--ratings">
-        <p>
-          IMBD
-          <span class="score">8 / 10</span> R.T
-          <span class="score">91%</span> Fantasy/Mystery 2hr44min
-        </p>
-      </div>
-      <div class="movie_info--details">
-        <p
-          class="plot"
-        >Officer K (Ryan Gosling), a new blade runner for the Los Angeles Police Department, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. His discovery leads him on a quest to find Rick Deckard (Harrison Ford), a former blade runner...</p>
-      </div>
-      <div class="movie_info--btn-actions">
-        <button class="btn btn-primary">Watch Now</button>
-        <button class="btn btn-secondary">More info</button>
+    <div class="spin" v-else>
+      <div class="loader">
+        <img src="../assets/spinner.svg" alt="Loader" />
+        <h3>Grab some popcorn while you wait</h3>
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
-  name: "MovieResult"
+  name: "MovieResult",
+  data() {
+    return {
+      backdrop: `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`,
+      poster: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
+      success: false,
+      genres: this.movie.genres
+    };
+  },
+  computed: {
+    movie() {
+      return !this.$store.getters.movieResults
+        ? (this.success = false)
+        : this.$store.getters.movieResults;
+    },
+    loadingStatus() {
+      return this.$store.getters.loadingStatus;
+    },
+    movieGenres() {
+      for (let genre of this.genres) {
+      }
+    }
+  },
+  filters: {
+    getDuration(value) {
+      if (!value) return "";
+      let h = (value / 60) | 0,
+        m = value % 60 | 0;
+
+      return moment
+        .utc()
+        .hours(h)
+        .minutes(m)
+        .format(`h:mm`);
+    }
+  }
+  // methods: {
+  //   async getMovieDetails() {
+  //     const { data } = await axios.get(`/movie/${movie.id}`, {
+  //       params: {
+  //         api_key: process.env.VUE_APP_API_KEY,
+  //         language: "en-US"
+  //       }
+  //     });
+
+  //     console.log(data);
+  //   }
+  // }
+  // mounted() {
+  //   console.log(this.movies);
+  // }
 };
 </script>
 
 <style lang="scss" scoped>
+.spin {
+  // position: relative;
+  // top: 50;
+  // left: 50;
+  // transform: translate(-50%, -50%);
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  // margin-bottom: 2rem;
+
+  width: 100%;
+  padding: 6rem;
+
+  .loader {
+    display: flex;
+
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    img {
+      width: 8rem;
+      align-self: center;
+      justify-self: center;
+    }
+  }
+}
+
+// .results {
+//   display: relative;
+// }
 .movie {
   grid-column: 2/3;
   // padding: 4rem;
+  // display: relative;
 
   display: grid;
   grid-template-columns: min-content 1fr;
@@ -49,7 +147,6 @@ export default {
     align-self: center;
 
     .image_box {
-
       .poster {
         width: 20rem;
       }
@@ -60,7 +157,7 @@ export default {
     display: grid;
 
     grid-template-columns: 100%;
-    grid-template-rows: min-content min-content max-content 1fr min-content;;
+    grid-template-rows: min-content min-content max-content 1fr min-content;
     grid-row-gap: 1rem;
 
     &--title {
@@ -73,7 +170,7 @@ export default {
 
       .movie_year {
         font-size: 1.6rem;
-        font-weight: 500;
+        font-weight: 800;
         align-self: center;
 
         margin-left: 1rem;
@@ -93,7 +190,6 @@ export default {
     &--details {
       font-size: 1.6rem;
       align-self: center;
-
     }
 
     &--btn-actions {

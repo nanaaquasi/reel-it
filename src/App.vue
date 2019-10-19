@@ -10,7 +10,7 @@
 <style src="vue-select/dist/vue-select.css"></style>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css?family=Nunito:400,600,700,800,900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,900&display=swap");
 
 :root {
   --main-text-color: #eafffe;
@@ -35,7 +35,7 @@ body {
   max-width: 100%;
   max-height: 100%;
   box-sizing: border-box;
-  font-family: "Nunito", sans-serif;
+  font-family: "Source Sans Pro", "sans-serif";
   font-size: 1.6rem;
   font-weight: 400;
   color: var(--main-text-color);
@@ -43,6 +43,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url(./assets/main_bg.png);
   background-repeat: no-repeat;
-  overflow-y: hidden;
+  // overflow-y: hidden;
 }
 </style>
