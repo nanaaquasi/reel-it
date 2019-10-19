@@ -1,72 +1,125 @@
 <template>
-  <div class="filter_box">
+  <form class="filter_box" @submit.prevent="onSubmit">
     <div class="genre">
       <label for="genre">Genre:</label>
       <v-select
         class="select"
-        multiple
-        :options="['Adventure', 'Fantasy', 'Romance']"
-        v-model="genre"
+        label="name"
+        @input="setGenre"
+        :options="genres"
+        :value="$store.state.selectedGenre"
         placeholder="Filter by genres"
       ></v-select>
     </div>
 
-    <div class="genre">
-      <label for="genre">Year</label>
-      <v-select class="select" :options="['2019', '2018', '2017']" v-model="year"></v-select>
+    <div class="year">
+      <label for="year">Year</label>
+      <v-select class="select" :options="populateYear()" v-model="year"></v-select>
     </div>
 
-    <div class="genre">
-      <label for="genre">Sort By</label>
-      <v-select
-        class="select"
-        :options="['Popularity Ascending', 'Rateings Ascending', 'Romance']"
-        v-model="sort"
-      ></v-select>
+    <div class="sort">
+      <label for="sort">Sort By</label>
+      <v-select class="select" :options="['Most Popular', 'Most Rated']" v-model="sort"></v-select>
     </div>
-    <div class="movie_type">
+    <!-- <div class="movie_type">
       <p>Type</p>
       <div class="checkboxes">
-        <div class="box">
-          <input
-            class="styled-checkbox"
-            type="checkbox"
-            name="movie_type"
-            id="movie_type"
-            value="TV Series"
-          />
-          <label for="genre">Tv Show</label>
-        </div>
-
-        <div class="box">
-          <input
-            class="styled-checkbox"
-            type="checkbox"
-            name="movie_type"
-            id="movie_type"
-            value="TV Series"
-          />
-          <label for="genre">Movie</label>
-        </div>
+        <label>
+          <input class="styled-checkbox" type="checkbox" v-model="tv" />
+          <span class="label_text">TV Show</span>
+        </label>
+        <label>
+          <input class="styled-checkbox" type="checkbox" v-model="movie" />
+          <span class="label_text">Movie</span>
+        </label>
       </div>
+    </div>-->
+    <div class="actions" v-if="!loadingStatus">
+      <div></div>
+      <input type="submit" class="btn btn-primary" value="Take a spin" />
     </div>
-    <div class="actions">
-      <button class="btn btn-primary">Take a spin</button>
+    <div class="actions" v-else>
+      <div></div>
+      <input type="submit" class="btn btn-primary" value="Spinning.." />
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
 import "vue-select/dist/vue-select.css";
+import { mapGetters } from "vuex";
 
 export default {
   name: "MovieFilter",
   data() {
     return {
-      genre: "",
-      year: "2018",
-      sort: "Popularity Ascending"
+      year: [],
+      sort: "Most Popular"
+      // buttonText: "Take a spin"
+      // tv: "",
+      // movie: ""
     };
+  },
+  mounted() {
+    this.$store.dispatch("GET_MOVIE_GENRES");
+    console.log(process.env.VUE_APP_API_KEY);
+    console.log(process.env.VUE_APP_API_URL);
+  },
+  methods: {
+    setGenre(value) {
+      this.$store.commit("SET_SELECTED_GENRE", value);
+    },
+    populateYear() {
+      let totalYears = [];
+      const year = new Date().getFullYear();
+
+      for (let i = 1950; i <= year; i++) {
+        totalYears.push(i);
+      }
+
+      return totalYears;
+    },
+    onSubmit() {
+      this.$store.commit("SET_LOADING_STATUS", true);
+
+      let selectedSort;
+      if (this.sort === "Popular") {
+        selectedSort = "popularity.desc";
+      } else if (this.sort === "Most Rated") {
+        selectedSort = "vote_average.desc";
+      } else {
+        selectedSort = "popularity.desc";
+      }
+
+      const movieData = {
+        sort: selectedSort,
+        year: this.year
+      };
+
+      // this.buttonText = "Spinning";
+
+      setTimeout(() => {
+        this.$store.dispatch("GET_MOVIES", movieData);
+        // this.buttonText = "Spinning";
+      }, 3000);
+      // this.$store.dispatch("GET_MOVIE_DETAIL", movie.id);
+    }
+  },
+  computed: {
+    genres() {
+      // return !this.$store.getters ? null : this.$store.getters.genres
+      if (this.$store.getters.genres) {
+        return this.$store.getters.genres;
+      }
+    },
+    loadingStatus() {
+      return this.$store.getters.loadingStatus;
+    }
+    // movie() {
+    //   return !this.$store.getters.movieResults
+    //     ? "No Results"
+    //     : this.$store.getters.movieResults;
+    // }
   }
 };
 </script>
@@ -74,20 +127,26 @@ export default {
 <style src="vue-select/dist/vue-select.css"></style>
 
 <style lang="scss" scoped>
+%grid-col-6 {
+  display: grid;
+
+  grid-template-columns: 6rem 1fr;
+  grid-column-gap: 2rem;
+}
 .filter_box {
   grid-column: 1 / 2;
   // height: 100%;
   display: grid;
   align-items: center;
 
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-row-gap: 2rem;
 
-  .genre {
-    display: grid;
-    // background: whitesmoke;
-
-    grid-template-columns: 6rem 1fr;
-    grid-column-gap: 2rem;
+  .genre,
+  .year,
+  .sort,
+  .actions {
+    @extend %grid-col-6;
   }
 
   .movie_type {
@@ -100,65 +159,32 @@ export default {
     display: grid;
 
     grid-template-columns: 1fr 1fr;
-    // grid-column-gap: 2rem;
+  }
+
+  input[type="checkbox"] {
+    font-size: 20rem;
+
+    + .label_text {
+      cursor: pointer;
+
+      &::before {
+        content: "hello";
+      }
+    }
   }
 
   select {
     color: var(--main-text-color) !important;
   }
 
-  .styled-checkbox {
-    position: absolute; // take it out of document flow
-    opacity: 0; // hide it
-
-    & + label {
-      position: relative;
-      cursor: pointer;
-      padding: 0;
-    }
-
-    // Box.
-    & + label:before {
-      content: "";
-      margin-right: 10px;
-      display: inline-block;
-      vertical-align: text-top;
-      width: 20px;
-      height: 20px;
-      background: white;
-    }
-
-    &:checked + label:before {
-      background: #f35429;
-    }
-
-    // Disabled state label.
-    &:disabled + label {
-      color: #b8b8b8;
-      cursor: auto;
-    }
-
-    &:checked + label:after {
-      content: "";
-      position: absolute;
-      left: 5px;
-      top: 9px;
-      background: white;
-      width: 2px;
-      height: 2px;
-      box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white,
-        4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
-      transform: rotate(45deg);
-    }
-  }
-
   .actions {
-    justify-self: center;
-    align-self: center;
+    // justify-self: center;
+    // align-self: center;
     width: 100%;
+    // margin-left: 2rem;
 
     .btn {
-      width: 80%;
+      width: 100%;
       padding: 1.2rem 4rem;
       border: none;
       outline: none;
@@ -176,7 +202,7 @@ export default {
       );
       color: var(--color-black);
       // margin-left: 4rem;
-      transform: translateX(4rem);
+      // transform: translateX(4rem);
     }
   }
 }
