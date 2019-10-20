@@ -1,6 +1,6 @@
 <template>
   <section class="result">
-    <div class="movie" v-if="!loadingStatus">
+    <div class="movie">
       <div class="movie_poster">
         <div class="image_box">
           <img
@@ -21,22 +21,21 @@
           <p>
             Total Score
             <span class="score">{{movie.vote_average}}</span>
-            Fantasy/Mystery | {{movie.runtime}} mins
+            Fantasy/Mystery
           </p>
         </div>
-        <div class="movie_info--details">
+        <div class="runtime">
+          <p><b>Runtime:</b> {{movie.runtime}} mins</p>
+        </div>
+      </div>
+      <div class="details">
+        <div class="details__overview">
           <p class="plot">{{movie.overview}}</p>
         </div>
-        <div class="movie_info--btn-actions">
+        <div class="details__actions">
           <button class="btn btn-primary">Watch Now</button>
           <button class="btn btn-secondary" @click.prevent="onClick(movie.id)">More info</button>
         </div>
-      </div>
-    </div>
-    <div class="spin" v-else>
-      <div class="loader">
-        <img src="../assets/spinner.svg" alt="Loader" />
-        <h3>Grab some popcorn while you wait</h3>
       </div>
     </div>
   </section>
@@ -49,16 +48,13 @@ export default {
   name: "MovieResult",
   data() {
     return {
-      backdrop: `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`,
-      poster: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
-      success: false,
       genres: this.movie.genres
     };
   },
   computed: {
     movie() {
       return !this.$store.getters.movieResults
-        ? (this.success = false)
+        ? "No results found"
         : this.$store.getters.movieResults;
     },
     loadingStatus() {
@@ -82,30 +78,13 @@ export default {
         .format(`h:mm`);
     }
   }
-  // methods: {
-  //   async getMovieDetails() {
-  //     const { data } = await axios.get(`/movie/${movie.id}`, {
-  //       params: {
-  //         api_key: process.env.VUE_APP_API_KEY,
-  //         language: "en-US"
-  //       }
-  //     });
-
-  //     console.log(data);
-  //   }
-  // }
-  // mounted() {
-  //   console.log(this.movies);
-  // }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/mixins.scss";
+
 .spin {
-  // position: relative;
-  // top: 50;
-  // left: 50;
-  // transform: translate(-50%, -50%);
   display: flex;
 
   flex-direction: column;
@@ -131,54 +110,101 @@ export default {
   }
 }
 
-// .results {
-//   display: relative;
-// }
+.initial {
+  grid-column: 2 / 3;
+}
+
 .movie {
   grid-column: 2/3;
-  // padding: 4rem;
-  // display: relative;
 
   display: grid;
-  grid-template-columns: min-content 1fr;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: max-content 1fr;
+  grid-template-areas:
+    "poster info"
+    "poster overview";
   grid-column-gap: 1.2rem;
+
+  @include respond(tab-port) {
+    display: grid;
+
+    grid-template-columns: 1fr 2.2fr;
+    grid-template-rows: max-content max-content;
+
+    grid-template-areas:
+      "poster info"
+      "overview overview";
+  }
+
+  @include respond(phone) {
+    display: grid;
+
+    grid-template-columns: 1fr 2.2fr;
+    grid-template-rows: max-content max-content;
+
+    grid-template-areas:
+      "poster info"
+      "overview overview";
+  }
 
   &_poster {
     align-self: center;
+    grid-area: poster;
+
+    @include respond(tab-port) {
+      grid-area: poster;
+    }
+
+    @include respond(phone) {
+      grid-area: poster;
+    }
 
     .image_box {
       .poster {
-        width: 20rem;
+        width: 100%;
+
+        @include respond(phone) {
+          width: 100%;
+        }
       }
     }
   }
 
   &_info {
-    display: grid;
+    grid-area: info;
+    display: flex;
 
-    grid-template-columns: 100%;
-    grid-template-rows: min-content min-content max-content 1fr min-content;
-    grid-row-gap: 1rem;
+    flex-direction: column;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
 
     &--title {
-      font-size: 1.6rem;
+      font-size: 1.45rem;
       font-weight: 700;
 
       display: flex;
       align-content: center;
       align-items: center;
 
+      @include respond(phone) {
+        font-size: 1.4rem;
+      }
+
       .movie_year {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
         font-weight: 800;
         align-self: center;
 
-        margin-left: 1rem;
+        @include respond(phone) {
+          font-size: 1.35rem;
+        }
       }
     }
 
     &--ratings {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: 600;
 
       .score {
@@ -186,14 +212,32 @@ export default {
         color: var(--color-primary);
       }
     }
+  }
 
-    &--details {
-      font-size: 1.6rem;
-      align-self: center;
+  .details {
+    grid-area: overview;
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+
+    @include respond(tab-port) {
+      grid-area: overview;
     }
 
-    &--btn-actions {
+    @include respond(phone) {
+      grid-area: overview;
+    }
+
+    &__overview {
+      font-size: 1.6rem;
       align-self: center;
+
+      margin-bottom: 2rem;
+    }
+
+    &__actions {
+      justify-self: center;
       display: flex;
       // margin-top: 1rem;
 
