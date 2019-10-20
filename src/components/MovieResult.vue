@@ -25,12 +25,15 @@
           </p>
         </div>
         <div class="runtime">
-          <p><b>Runtime:</b> {{movie.runtime}} mins</p>
+          <p>
+            <b>Runtime:</b>
+            {{movie.runtime}} mins
+          </p>
         </div>
       </div>
       <div class="details">
         <div class="details__overview">
-          <p class="plot">{{movie.overview}}</p>
+          <p class="plot">{{movie.overview | truncate }}</p>
         </div>
         <div class="details__actions">
           <button class="btn btn-primary">Watch Now</button>
@@ -76,6 +79,13 @@ export default {
         .hours(h)
         .minutes(m)
         .format(`h:mm`);
+    },
+    truncate(str) {
+      if (str.length <= 200) {
+        return str;
+      }
+
+      return `${str.slice(0, 200)} ...`;
     }
   }
 };
@@ -133,7 +143,7 @@ export default {
 
     grid-template-areas:
       "poster info"
-      "overview overview";
+      "poster overview";
   }
 
   @include respond(phone) {
