@@ -60,6 +60,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url(./assets/main_bg.png);
   background-repeat: no-repeat;
+  background-size: cover;
   // overflow-y: hidden;
 }
 

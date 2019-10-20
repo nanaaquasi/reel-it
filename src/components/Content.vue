@@ -8,8 +8,6 @@
       </p>
     </div>
     <div class="main_content wrapper--rounded">
-      <!-- <Filter /> -->
-
       <MovieFilter />
       <div class="initial" v-if="initialShow">
         <h3>Take a spin to movie land.</h3>
@@ -57,14 +55,10 @@ export default {
   // max-width: 80vw;
   max-height: 100%;
   margin-top: 3rem;
-  // margin: 4rem 0;
-  // margin-top: 2rem;
   align-self: center;
   padding: 2rem 0;
-  // justify-self: center;
 
   display: grid;
-  // grid-template-columns: 1fr 2fr;
   grid-auto-flow: row;
   grid-template-rows: 2rem 1fr;
 
@@ -83,7 +77,6 @@ export default {
     justify-self: center;
     margin-bottom: 6rem;
 
-    // position: relative;
     display: flex;
 
     &_main {
@@ -114,9 +107,7 @@ export default {
             height: 0.6rem;
             bottom: -0.3rem;
           }
-          //   right: 0;
         }
-        //   border-bottom: .4rem solid var(--main-text-color);
       }
 
       @include respond(phone) {
@@ -127,19 +118,14 @@ export default {
 
   .main_content {
     width: 100%;
-    // max-height: 100%;
     grid-row: 2 / 3;
     grid-column: 1 / -1;
-    // margin: auto;
     display: grid;
     padding: 4rem 2rem;
 
     grid-template-columns: 2fr 3fr;
     grid-template-rows: 100%;
     grid-column-gap: 2rem;
-
-    // width: 80vw;
-    // height: 56vh;
 
     @include respond(tab-port) {
       display: initial;
@@ -151,16 +137,11 @@ export default {
       grid-template-rows: 1fr 2fr;
     }
 
-    // margin-top: 4rem;
     background: linear-gradient(var(--color-black), var(--color-black)),
       linear-gradient(to right, rgb(255, 74, 74), purple);
     border: 5px solid transparent;
     background-repeat: no-repeat;
     background-origin: padding-box, border-box;
-
-    // .full {
-    //   grid-column: 1 /2;
-    // }
   }
 
   .wrapper--rounded {

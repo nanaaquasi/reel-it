@@ -37,7 +37,11 @@
         </div>
         <div class="details__actions">
           <button class="btn btn-primary">Watch Now</button>
-          <button class="btn btn-secondary" @click.prevent="onClick(movie.id)">More info</button>
+          <router-link
+            :to="{ name: 'movie', params: {id: movie.id}}"
+            tag="button"
+            class="btn btn-secondary"
+          >More info</router-link>
         </div>
       </div>
     </div>
@@ -50,16 +54,9 @@ import moment from "moment";
 export default {
   name: "MovieResult",
   data() {
-    return {
-      // genres: movie.genres || []
-    };
+    return {};
   },
   computed: {
-    // movie() {
-    //   return !this.$store.getters.movieResults
-    //     ? null
-    //     : this.$store.getters.movieResults;
-    // },
     movie() {
       if (!this.$store.getters.movieResults) {
         return;
@@ -70,9 +67,7 @@ export default {
       return this.$store.getters.loadingStatus;
     }
   },
-  // mounted() {
-  //   return this.movie || "";
-  // },
+
   filters: {
     getDuration(value) {
       if (!value) return "";
@@ -115,7 +110,7 @@ export default {
 
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: max-content 1fr;
+  grid-template-rows: max-content max-content;
   grid-template-areas:
     "poster info"
     "poster overview";
@@ -249,7 +244,7 @@ export default {
         border-radius: 50rem;
         // margin-top: 2rem;
         cursor: pointer;
-
+        transform: translateX(0rem);
         &-primary {
           background-image: linear-gradient(
             90deg,
