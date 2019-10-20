@@ -91,7 +91,7 @@ export default new Vuex.Store({
     movieResults(state){
       const movie = state.movie
 
-      if(!movie){
+      if(movie === null){
         return
       }
 

@@ -16,6 +16,7 @@ export default {
 <style lang="scss" scoped>
 .main_footer {
   // height: 4rem;
+  grid-area: footer;
   align-self: center;
   justify-self: center;
   // background: whitesmoke;
@@ -33,7 +34,7 @@ export default {
       &::after {
         content: "";
         width: 100%;
-        height: .8rem;
+        height: 0.8rem;
         background-image: linear-gradient(
           90deg,
           rgba(0, 255, 226, 1) 0%,

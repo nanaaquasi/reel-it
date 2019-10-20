@@ -1,43 +1,43 @@
 <template>
   <div class="main_nav">
-      <div class="logo_box">
-          <div class="logo">
-              <img src="../assets/reel-it_logo.png" alt="Brand Logo" class="logo_img">
-          </div>
+    <div class="logo_box">
+      <div class="logo">
+        <img src="../assets/reel-it_logo.png" alt="Brand Logo" class="logo_img" />
       </div>
-      <!-- <Search/> -->
+    </div>
+    <!-- <Search/> -->
   </div>
 </template>
 
 <script>
-import Search from '@/components/Search'
+import Search from "@/components/Search";
 export default {
-    name: 'Header',
-    components: {
-        Search
-    }
-}
+  name: "Header",
+  components: {
+    Search
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-    .main_nav{
-        display: flex;
+.main_nav {
+  grid-area: header;
+  display: flex;
 
-        justify-content: space-between;
-        align-content: center;
+  justify-content: space-between;
+  align-content: center;
 
-        .logo_box {
-            width: 100%;
-            height: 100%;
-            margin-left: 2rem;
-        }
+  .logo_box {
+    width: 100%;
+    height: 100%;
+    margin-left: 2rem;
+  }
 
-        .logo{
-            img{
-                width: 14rem;
-                height: 8rem;
-            }
-        }
+  .logo {
+    img {
+      width: 14rem;
+      height: 8rem;
     }
-
+  }
+}
 </style>

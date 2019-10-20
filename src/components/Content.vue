@@ -9,8 +9,13 @@
     </div>
     <div class="main_content wrapper--rounded">
       <!-- <Filter /> -->
+
       <MovieFilter />
-      <MovieResult />
+      <!-- <div class="initial">
+        <h3>Take a spin to movie land.</h3>
+      </div>-->
+      <Loader v-if="loadingStatus" />
+      <MovieResult v-else />
     </div>
   </section>
 </template>
@@ -19,30 +24,52 @@
 // import Filter from "@/components/Filter";
 import MovieResult from "@/components/MovieResult";
 import MovieFilter from "@/components/MovieFilter";
-
+import Loader from "@/components/Loader";
 
 export default {
   name: "Content",
   components: {
-    // Filter,
+    Loader,
     MovieResult,
     MovieFilter
+  },
+  computed: {
+    movie() {
+      return !this.$store.getters.movieResults
+        ? "No results found"
+        : this.$store.getters.movieResults;
+    },
+    loadingStatus() {
+      return this.$store.getters.loadingStatus;
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/mixins.scss";
+
 .content {
-  max-width: 80vw;
+  grid-area: content;
+  // max-width: 80vw;
+  max-height: 100%;
   margin-top: 3rem;
   // margin: 4rem 0;
   // margin-top: 2rem;
   align-self: center;
-  justify-self: center;
+  padding: 2rem 0;
+  // justify-self: center;
 
   display: grid;
-  grid-template-columns: 35rem 1fr;
+  // grid-template-columns: 1fr 2fr;
+  grid-auto-flow: row;
   grid-template-rows: 2rem 1fr;
+
+  .initial {
+    align-self: center;
+    width: 100%;
+    padding: 8rem;
+  }
 
   .heading {
     grid-column: 1 / -1;
@@ -57,16 +84,6 @@ export default {
     &_main {
       font-size: 2rem;
       font-weight: 600;
-        // margin-bottom: 4px;
-
-      // &::before {
-      //   content: url(../assets/puzzled.png);
-      //   align-self: center;
-      //   justify-self: center;
-      //   margin-top: 3px;
-      //   transform: scale(0.4);
-      //   // display: inline;
-      // }
 
       .underline {
         position: relative;
@@ -90,11 +107,15 @@ export default {
         }
         //   border-bottom: .4rem solid var(--main-text-color);
       }
+
+      @include respond(phone) {
+        font-size: 1.6rem;
+      }
     }
   }
 
   .main_content {
-    // max-width: 100%;
+    width: 100%;
     // max-height: 100%;
     grid-row: 2 / 3;
     grid-column: 1 / -1;
@@ -102,9 +123,22 @@ export default {
     display: grid;
     padding: 4rem 2rem;
 
-    grid-template-columns: 40rem 1fr;
+    grid-template-columns: 2fr 3fr;
     grid-template-rows: 100%;
     grid-column-gap: 2rem;
+
+    // width: 80vw;
+    // height: 56vh;
+
+    @include respond(tab-port) {
+      display: initial;
+      grid-template-rows: 1fr 2fr;
+    }
+
+    @include respond(phone) {
+      display: initial;
+      grid-template-rows: 1fr 2fr;
+    }
 
     // margin-top: 4rem;
     background: linear-gradient(var(--color-black), var(--color-black)),
