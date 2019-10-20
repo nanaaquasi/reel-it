@@ -11,9 +11,9 @@
       <!-- <Filter /> -->
 
       <MovieFilter />
-      <!-- <div class="initial">
+      <div class="initial" v-if="initialShow">
         <h3>Take a spin to movie land.</h3>
-      </div>-->
+      </div>
       <Loader v-if="loadingStatus" />
       <MovieResult v-else />
     </div>
@@ -36,11 +36,14 @@ export default {
   computed: {
     movie() {
       return !this.$store.getters.movieResults
-        ? "No results found"
+        ? null
         : this.$store.getters.movieResults;
     },
     loadingStatus() {
       return this.$store.getters.loadingStatus;
+    },
+    initialShow() {
+      return this.$store.getters.initialShow;
     }
   }
 };
@@ -67,8 +70,10 @@ export default {
 
   .initial {
     align-self: center;
+    justify-items: center;
     width: 100%;
     padding: 8rem;
+    text-align: center;
   }
 
   .heading {
@@ -84,6 +89,7 @@ export default {
     &_main {
       font-size: 2rem;
       font-weight: 600;
+      text-align: center;
 
       .underline {
         position: relative;
@@ -103,6 +109,11 @@ export default {
           position: absolute;
           left: 0;
           bottom: -0.5rem;
+
+          @include respond(tab-port) {
+            height: 0.6rem;
+            bottom: -0.3rem;
+          }
           //   right: 0;
         }
         //   border-bottom: .4rem solid var(--main-text-color);

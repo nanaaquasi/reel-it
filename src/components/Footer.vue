@@ -14,6 +14,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/mixins.scss";
+
 .main_footer {
   // height: 4rem;
   grid-area: footer;
@@ -25,6 +27,10 @@ export default {
     font-size: 1.8rem;
     font-weight: 600;
     // line-height: 1;
+
+    @include respond(phone) {
+      font-size: 1.5rem;
+    }
 
     a {
       text-decoration: none !important;

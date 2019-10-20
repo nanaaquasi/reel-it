@@ -45,7 +45,7 @@ export default {
 
   @include respond(phone) {
     grid-template-rows: 8rem 1fr 8rem;
-    grid-template-columns: 3rem 3fr 3rem;
+    grid-template-columns: 1rem 3fr 1rem;
   }
 
   // margin: 0 auto;

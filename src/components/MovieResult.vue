@@ -1,6 +1,6 @@
 <template>
   <section class="result">
-    <div class="movie">
+    <div class="movie" v-if="movie">
       <div class="movie_poster">
         <div class="image_box">
           <img
@@ -12,16 +12,16 @@
       </div>
       <div class="movie_info">
         <div class="movie_info--title">
-          <h2>
+          <h3>
             {{movie.title}}
-            <span class="movie_year">( {{movie.release_date.split('-')[0]}} )</span>
-          </h2>
+            <span class="movie_year">( {{movie.release_date | getYear}} )</span>
+          </h3>
         </div>
         <div class="movie_info--ratings">
           <p>
             Total Score
-            <span class="score">{{movie.vote_average}}</span>
-            Fantasy/Mystery
+            <span class="score">{{movie.vote_average}}&nbsp;</span>|
+            <span v-for="(genre, index) in movie.genres" :key="index">{{genre.name}}&nbsp;</span>
           </p>
         </div>
         <div class="runtime">
@@ -51,23 +51,28 @@ export default {
   name: "MovieResult",
   data() {
     return {
-      genres: this.movie.genres
+      // genres: movie.genres || []
     };
   },
   computed: {
+    // movie() {
+    //   return !this.$store.getters.movieResults
+    //     ? null
+    //     : this.$store.getters.movieResults;
+    // },
     movie() {
-      return !this.$store.getters.movieResults
-        ? "No results found"
-        : this.$store.getters.movieResults;
+      if (!this.$store.getters.movieResults) {
+        return;
+      }
+      return this.$store.getters.movieResults;
     },
     loadingStatus() {
       return this.$store.getters.loadingStatus;
-    },
-    movieGenres() {
-      for (let genre of this.genres) {
-      }
     }
   },
+  // mounted() {
+  //   return this.movie || "";
+  // },
   filters: {
     getDuration(value) {
       if (!value) return "";
@@ -81,11 +86,18 @@ export default {
         .format(`h:mm`);
     },
     truncate(str) {
+      if (!str) return;
       if (str.length <= 200) {
         return str;
       }
 
       return `${str.slice(0, 200)} ...`;
+    },
+    getYear(val) {
+      if (!val) {
+        return;
+      }
+      return val.split("-")[0];
     }
   }
 };
@@ -93,32 +105,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "../scss/mixins.scss";
-
-.spin {
-  display: flex;
-
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  // margin-bottom: 2rem;
-
-  width: 100%;
-  padding: 6rem;
-
-  .loader {
-    display: flex;
-
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-
-    img {
-      width: 8rem;
-      align-self: center;
-      justify-self: center;
-    }
-  }
-}
 
 .initial {
   grid-column: 2 / 3;

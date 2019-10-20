@@ -20,6 +20,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/mixins.scss";
+
 .main_nav {
   grid-area: header;
   display: flex;
@@ -27,10 +29,18 @@ export default {
   justify-content: space-between;
   align-content: center;
 
+  @include respond(phone) {
+    justify-content: center;
+  }
+
   .logo_box {
     width: 100%;
     height: 100%;
     margin-left: 2rem;
+
+    @include respond(phone) {
+      justify-self: center;
+    }
   }
 
   .logo {

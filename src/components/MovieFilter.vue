@@ -63,6 +63,7 @@ export default {
     },
     onSubmit() {
       this.$store.commit("SET_LOADING_STATUS", true);
+      this.$store.commit("SET_INITIAL_STATUS", false);
 
       let selectedSort;
       if (this.sort === "Popular") {
@@ -78,9 +79,11 @@ export default {
         year: this.year
       };
 
+      // this.$store.dispatch("GET_MOVIES", movieData);
+
       setTimeout(() => {
         this.$store.dispatch("GET_MOVIES", movieData);
-      }, 3000);
+      }, 2000);
     }
   },
   computed: {

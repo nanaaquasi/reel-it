@@ -9,7 +9,8 @@ export default new Vuex.Store({
     genres: '',
     selectedGenre: 'All Genres',
     movie: null,
-    loadingStatus: false
+    loadingStatus: false,
+    initialShow: true
   },
   mutations: {
     'STORE_GENRES'(state, genres) {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     },
     'SET_LOADING_STATUS'(state, status){
       state.loadingStatus = status
+    },
+    'SET_INITIAL_STATUS'(state, status){
+      state.initialShow = status;
     },
     'STORE_MOVIE'(state, movie){
       state.movie = movie;
@@ -48,6 +52,8 @@ export default new Vuex.Store({
         // console.log(movieData);
 
         commit('SET_LOADING_STATUS', true)
+
+        commit('SET_INITIAL_STATUS', false);
 
         const {data} = await axios.get('/discover/movie', {
           params: {
@@ -82,22 +88,20 @@ export default new Vuex.Store({
 
       console.log(data);
       commit('STORE_MOVIE', data)
+
+      commit('SET_INITIAL_STATUS', false)
       
       commit('SET_LOADING_STATUS', false)
+  
     }
   },
   getters: {
     genres: (state) => state.genres,
     movieResults(state){
       const movie = state.movie
-
-      if(movie === null){
-        return
-      }
-
       return movie
-      
     },
-    loadingStatus: (state) => state.loadingStatus
+    loadingStatus: (state) => state.loadingStatus,
+    initialShow: (state) => state.initialShow
   }
 });
