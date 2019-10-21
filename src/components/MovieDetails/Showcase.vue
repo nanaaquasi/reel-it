@@ -274,6 +274,7 @@ export default {
 
       @include respond(phone) {
         margin-top: 1rem;
+        border: 2px solid var(--color-primary);
       }
     }
 
@@ -398,6 +399,7 @@ export default {
         width: 4.5rem;
         height: 4.5rem;
         left: 0.1rem;
+        border: 0.4px solid var(--color-primary);
       }
     }
 
