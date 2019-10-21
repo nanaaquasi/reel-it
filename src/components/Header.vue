@@ -10,12 +10,9 @@
 </template>
 
 <script>
-import Search from "@/components/Search";
 export default {
   name: "Header",
-  components: {
-    Search
-  }
+  components: {}
 };
 </script>
 
