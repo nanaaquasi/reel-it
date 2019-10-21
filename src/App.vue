@@ -64,9 +64,9 @@ body {
   overflow-x: hidden;
 }
 
-select .select-css {
-  border: 2px solid orchid !important;
-}
+// select .select-css {
+//   border: 2px solid orchid !important;
+// }
 
 .vs--single .vs__selected {
   color: rgb(209, 209, 209);
