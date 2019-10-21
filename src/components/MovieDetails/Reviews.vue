@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="review__section">
     <div class="reviews wrapper--rounded" v-if="review">
       <div class="title">
         <h4>A review by {{review.author}}</h4>
@@ -34,19 +34,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../scss/mixins.scss";
+.review__section {
+  padding: 0 4rem;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+
+  @include respond(phone) {
+    width: 100%;
+    padding: 0;
+  }
+}
 .reviews {
   grid-area: reviews;
-  padding: 4rem;
-  margin-right: 5rem;
-
+  padding: 2rem;
+  // margin-right: 5rem;
+  width: 60vw;
   display: flex;
-  flex-direction: column;
-
+  flex-wrap: wrap;
   background: linear-gradient(var(--color-black), var(--color-black)),
     linear-gradient(to right, rgb(74, 255, 255), rgb(0, 128, 111));
   border: 5px solid transparent;
   background-repeat: no-repeat;
   background-origin: padding-box, border-box;
+
+  @include respond(phone) {
+    width: 100%;
+  }
 
   .wrapper--rounded {
     border-radius: 1rem;

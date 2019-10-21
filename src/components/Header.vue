@@ -34,19 +34,26 @@ export default {
   }
 
   .logo_box {
-    width: 100%;
-    height: 100%;
-    margin-left: 2rem;
+    width: 23rem;
+    // height: 100%;
+    margin-left: 6rem;
+
+    @include respond(tab-port) {
+      margin-left: 0;
+      width: 18rem;
+      justify-self: center;
+    }
 
     @include respond(phone) {
+      margin-left: 0;
+      width: 18rem;
       justify-self: center;
     }
   }
 
   .logo {
     img {
-      width: 14rem;
-      height: 8rem;
+      width: 100%;
     }
   }
 }

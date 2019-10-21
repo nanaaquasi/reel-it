@@ -11,5 +11,6 @@ export default {
 <style lang="scss" scoped>
 .recommend {
   grid-area: recommend;
+  overflow: none;
 }
 </style>

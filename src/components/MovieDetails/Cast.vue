@@ -16,6 +16,7 @@
         </div>
       </div>
     </div>
+    <hr />
   </section>
 </template>
 
@@ -40,9 +41,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../scss/mixins.scss";
 .cast {
   grid-area: cast;
   padding: 4rem;
+
+  @include respond(tab-port) {
+    padding: 1.5rem;
+  }
+
+  @include respond(phone) {
+    padding: 0;
+  }
 
   h3 {
     margin-bottom: 1rem;
@@ -50,8 +60,24 @@ export default {
     font-weight: bold;
   }
 
+  hr {
+    color: rgb(57, 57, 78);
+    display: block;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+
+    width: 80%;
+
+    @include respond(phone) {
+      color: rgb(122, 122, 122);
+      width: 100%;
+    }
+  }
+
   .members {
     display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
   }
 
   // justify-content: space-around;
@@ -60,15 +86,20 @@ export default {
     display: flex;
 
     flex-direction: column;
+    margin-bottom: 2rem;
 
     &:not(:last-child) {
-      margin-right: 1.5rem;
+      margin-right: 1rem;
     }
 
     // border: 1px solid var(--color-primary);
     &--image {
       width: 15rem;
       border-bottom: 2px solid darkcyan;
+
+      @include respond(tab-port) {
+        width: 10rem;
+      }
 
       img {
         width: 100%;

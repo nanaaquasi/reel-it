@@ -99,16 +99,21 @@ export default new Vuex.Store({
         console.log(error)
       }
   },
+  // async 'GET_MEDIA'({commit}, id){
+  //   try {
+      
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
 },
   getters: {
     genres: (state) => state.genres,
     movieResults(state){
-            if(!state.movie) return;
+      if(!state.movie) return;
 
-      const movie = state.movie
-
-      return movie
+      return state.movie
     },
     casts(state){
       if(!state.movie) return;
@@ -130,7 +135,7 @@ export default new Vuex.Store({
 
     },
     reviews(state){
-            if(!state.movie) return;
+      if(!state.movie) return;
 
        const {reviews} = state.movie
 
@@ -139,7 +144,7 @@ export default new Vuex.Store({
       return reviews.results
     },
     videos(state){
-            if(!state.movie) return;
+      if(!state.movie) return;
 
       const {videos} = state.movie
 

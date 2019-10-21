@@ -3,20 +3,20 @@
     <h3>Media (Videos & Posters)</h3>
     <div class="videos">
       <div class="video" v-for="(video, index) in videos" :key="index">
-        <iframe
+        <object
           v-if="video"
           width="320"
-          height="240"
-          :src="`https://www.youtube.com/embed/${video.key}?autoplay=0`"
+          height="180"
+          :data="`https://www.youtube.com/embed/${video.key}?autoplay=0`"
           class="trailer"
-        ></iframe>
+        ></object>
       </div>
     </div>
-    <div class="images">
+    <!-- <div class="images">
       <div class="image__wrapper" v-for="(poster, index) in posters" :key="index">
         <img v-bind:src="`https://image.tmdb.org/t/p/w500/${poster.file_path}`" alt="Poster Image" />
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -52,14 +52,14 @@ export default {
 .videos {
   display: flex;
   // flex-wrap: wrap;
-  border-radius: 1rem;
+  // border-radius: 1rem;
   max-width: 60%;
   overflow-x: scroll;
-  margin-bottom: 4rem;
+  // margin-bottom: 2rem;
 
   background: linear-gradient(var(--color-black), var(--color-black)),
     linear-gradient(to right, rgb(74, 255, 255), rgb(0, 128, 111));
-  border: 5px solid transparent;
+  border: 3px solid transparent;
   background-repeat: no-repeat;
   background-origin: padding-box, border-box;
 
@@ -81,9 +81,9 @@ export default {
   }
 
   .video {
-    padding: 2rem 1rem;
+    padding: 1rem;
     &:not(:first-child) {
-      margin-left: 0.2rem;
+      margin-left: 1rem;
     }
 
     .trailer {
