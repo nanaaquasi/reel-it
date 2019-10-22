@@ -37,17 +37,7 @@ export default {
     "reviews";
   // "recommend";
   padding: 4rem;
-  background: #020914;
-  // background-image: url(../../assets/main_bg.png);
-  // background-repeat: no-repeat;
   background-size: auto;
   overflow: hidden;
-
-  // .main {
-  //   grid-area: content;
-
-  //   display: grid;
-  //   grid-template-rows: repeat(4, 15%);
-  // }
 }
 </style>

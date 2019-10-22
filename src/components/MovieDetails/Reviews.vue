@@ -27,7 +27,7 @@ export default {
         return str;
       }
 
-      return `${str.slice(0, 400)} ...`;
+      return `${str.slice(0, 300)} ...`;
     }
   }
 };
