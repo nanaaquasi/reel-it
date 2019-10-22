@@ -31,12 +31,17 @@ export default {
   display: grid;
 
   grid-template-rows: 8rem 3fr 8rem;
-  grid-template-columns: 20rem 2fr 20rem;
+  grid-template-columns: 15rem 2fr 15rem;
   grid-template-areas:
     "header header header"
     ".. content .."
     "footer footer footer";
   grid-row-gap: 2rem;
+
+  @include respond(tab-land) {
+    grid-template-rows: 8rem 1fr 8rem;
+    grid-template-columns: 10rem 3fr 10rem;
+  }
 
   @include respond(tab-port) {
     grid-template-rows: 8rem 1fr 8rem;
@@ -44,7 +49,7 @@ export default {
   }
 
   @include respond(phone) {
-    grid-template-rows: 8rem 1fr 8rem;
+    grid-template-rows: 7rem 1fr 7rem;
     grid-template-columns: 1rem 3fr 1rem;
   }
 

@@ -128,13 +128,18 @@ export default {
     grid-column-gap: 2rem;
 
     @include respond(tab-port) {
-      display: initial;
-      grid-template-rows: 1fr 2fr;
+      display: grid;
+      padding: 4rem;
+
+      grid-template-columns: 1fr 1.5fr;
+      grid-template-rows: 100%;
+      grid-column-gap: 2rem;
     }
 
     @include respond(phone) {
+      padding: 4rem 2rem;
       display: initial;
-      grid-template-rows: 1fr 2fr;
+      grid-template-rows: 1fr 1fr;
     }
 
     background: linear-gradient(var(--color-black), var(--color-black)),

@@ -173,6 +173,18 @@ export default {
     "poster info"
     "poster overview";
 
+  @include respond(tab-land) {
+    display: grid;
+    padding: 2rem;
+
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: max-content 1fr;
+
+    grid-template-areas:
+      "poster info"
+      "overview overview";
+  }
+
   @include respond(tab-port) {
     display: grid;
     padding: 2rem;
@@ -206,6 +218,11 @@ export default {
 
     align-self: center;
     justify-self: center;
+
+    @include respond(tab-land) {
+      grid-area: poster;
+      justify-self: center;
+    }
     @include respond(tab-port) {
       grid-area: poster;
       justify-self: center;
@@ -225,6 +242,11 @@ export default {
     flex-direction: column;
     justify-content: center;
     flex-wrap: wrap;
+
+    @include respond(tab-land) {
+      grid-area: info;
+      padding: 0;
+    }
 
     @include respond(tab-port) {
       grid-area: info;
@@ -333,8 +355,14 @@ export default {
       color: var(--color-primary);
     }
 
+    @include respond(tab-land) {
+      // padding: 0;
+      grid-area: overview;
+    }
+
     @include respond(tab-port) {
       // padding: 0;
+      grid-area: overview;
     }
 
     .featured {
@@ -399,7 +427,7 @@ export default {
         width: 4.5rem;
         height: 4.5rem;
         left: 0.1rem;
-        border: 0.4px solid var(--color-primary);
+        border: 0.4rem solid var(--color-primary);
       }
     }
 
