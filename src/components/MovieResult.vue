@@ -36,7 +36,9 @@
           <p class="plot">{{movie.overview | truncate }}</p>
         </div>
         <div class="details__actions">
-          <button class="btn btn-primary">Watch Now</button>
+          <button class="btn btn-primary">
+            <a v-bind:href="`${movie.homepage ? movie.homepage : '#'}`" target="_blank">Watch Now</a>
+          </button>
           <router-link
             :to="{ name: 'movie', params: {id: movie.id}}"
             tag="button"
@@ -253,6 +255,12 @@ export default {
             rgba(92, 228, 178, 1) 73%
           );
           color: var(--color-black);
+
+          a {
+            text-decoration: none;
+            color: inherit;
+            font: inherit;
+          }
         }
 
         &-secondary {

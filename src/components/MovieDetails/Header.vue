@@ -2,7 +2,9 @@
   <div class="main_nav">
     <div class="logo_box">
       <div class="logo">
-        <img src="../../assets/reel-it_logo.png" alt="Brand Logo" class="logo_img" />
+        <a href="/">
+          <img src="../../assets/reel-it_logo.png" alt="Brand Logo" class="logo_img" />
+        </a>
       </div>
     </div>
     <ul class="nav">
@@ -26,13 +28,14 @@ export default {
 .main_nav {
   display: flex;
   align-items: center;
+  background: #020b1a;
 
   // justify-content: center;
 
   .logo_box {
-    width: 20rem;
+    width: 16rem;
     margin-left: 2rem;
-    margin-top: 2rem;
+    // margin-top: 2rem;
 
     @include respond(phone) {
       justify-self: center;
@@ -55,6 +58,14 @@ export default {
         text-decoration: none;
         font-weight: 600;
         font-family: inherit;
+        font-size: 1.8rem;
+      }
+
+      margin-bottom: 1.8rem;
+      margin-left: 1rem;
+
+      &:hover {
+        border-bottom: 2px solid var(--color-primary);
       }
     }
   }

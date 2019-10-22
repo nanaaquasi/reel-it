@@ -2,7 +2,9 @@
   <div class="main_nav">
     <div class="logo_box">
       <div class="logo">
-        <img src="../assets/reel-it_logo.png" alt="Brand Logo" class="logo_img" />
+        <a href="/">
+          <img src="../assets/reel-it_logo.png" alt="Brand Logo" class="logo_img" />
+        </a>
       </div>
     </div>
     <!-- <Search/> -->
@@ -25,15 +27,17 @@ export default {
 
   justify-content: space-between;
   align-content: center;
+  background: #020b1a;
 
   @include respond(phone) {
     justify-content: center;
   }
 
   .logo_box {
-    width: 23rem;
+    width: 16rem;
     // height: 100%;
     margin-left: 6rem;
+    margin-bottom: 2rem;
 
     @include respond(tab-port) {
       margin-left: 0;

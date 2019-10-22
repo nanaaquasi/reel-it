@@ -32,6 +32,6 @@ export default {
   max-height: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 15rem 1fr 2.5fr;
+  grid-template-rows: 10rem 1fr 1fr;
 }
 </style>
