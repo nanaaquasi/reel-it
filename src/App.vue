@@ -64,8 +64,8 @@ body {
   overflow-x: hidden;
 }
 
-select .select-css {
-  border: none;
+.vs__search .vs__search:focus {
+  border: 1px solid transparent;
 }
 
 .vs--single .vs__selected {

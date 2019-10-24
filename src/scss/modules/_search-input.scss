@@ -16,7 +16,7 @@ $font-size: 1em;
   appearance: none;
   line-height: $line-height;
   font-size: $font-size;
-  border: 1px solid #2aa8a4;
+  border: 1px solid transparent;
   border-left: none;
   outline: none;
   margin: 4px 0 0 0;
@@ -46,9 +46,10 @@ $font-size: 1em;
     }
   }
 }
+
 // Single, when searching but not loading or open
 .vs--single.vs--searching:not(.vs--open):not(.vs--loading) {
-    .vs__search {
-      opacity: .2;
-    }
+  .vs__search {
+    opacity: .2;
+  }
 }
