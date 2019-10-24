@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 import Vselect from 'vue-select'
 import axios from 'axios';
+import './registerServiceWorker'
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 

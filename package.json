@@ -12,6 +12,7 @@
     "core-js": "^2.6.5",
     "iso-639-1": "^2.1.0",
     "moment": "^2.24.0",
+    "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
     "vue-multiselect": "^2.1.6",
     "vue-router": "^3.0.3",
@@ -21,6 +22,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",
     "@vue/cli-plugin-eslint": "^3.11.0",
+    "@vue/cli-plugin-pwa": "^4.0.5",
     "@vue/cli-service": "^3.11.0",
     "@vue/eslint-config-prettier": "^5.0.0",
     "babel-eslint": "^10.0.1",
