@@ -1,5 +1,9 @@
 <template>
-  <div class="showcase" v-if="movie">
+  <div
+    class="showcase"
+    v-if="movie"
+    v-bind:style="{ background: `linear-gradient(${linearGradient}),url(https://image.tmdb.org/t/p/w1400_and_h450_face/${movie.backdrop_path}`, 'background-size': 'cover', 'background-position': '50% 50%','background-repeat': 'no-repeat'}"
+  >
     <div class="poster">
       <div class="poster__img--box">
         <img
@@ -67,6 +71,12 @@ import moment from "moment";
 import ISO6391 from "iso-639-1";
 export default {
   name: "Showcase",
+  data() {
+    return {
+      linearGradient:
+        "to right bottom, rgba(44, 59, 58, 0.85), rgba(1, 51, 32, 0.85)"
+    };
+  },
   computed: {
     ...mapGetters({
       movie: "movieResults",
@@ -88,10 +98,6 @@ export default {
       // });
       return this.$store.getters.videos[0];
     }
-  },
-  mounted() {
-    // return this.movie;
-    console.log("Video", this.video);
   },
 
   filters: {
@@ -144,6 +150,11 @@ export default {
   width: 50vw;
   height: 40vh;
 
+  @include respond(tab-land) {
+    width: 65vw;
+    height: 45vh;
+  }
+
   @include respond(tab-port) {
     width: 60vw;
     height: 35vh;
@@ -157,11 +168,8 @@ export default {
 .showcase {
   color: white;
   //   background: aliceblue;
-  background: linear-gradient(
-    to right,
-    rgba(44, 59, 58, 0.5),
-    rgba(41, 73, 61, 0.5)
-  );
+  background-size: cover;
+  background-repeat: no-repeat;
   padding: 4rem;
   display: grid;
 
@@ -211,12 +219,6 @@ export default {
 
   .poster {
     grid-area: poster;
-    // background: orangered;
-    // padding: auto;
-
-    // position: relative;
-
-    align-self: center;
     justify-self: center;
 
     @include respond(tab-land) {
@@ -231,6 +233,7 @@ export default {
     @include respond(phone) {
       grid-area: poster;
       justify-self: center;
+      align-self: center;
     }
   }
 
@@ -382,7 +385,7 @@ export default {
           .crew {
             margin-bottom: 1.5rem;
             &:not(:last-child) {
-              margin-right: 1rem;
+              margin-right: 4rem;
             }
           }
         }

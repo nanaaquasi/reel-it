@@ -3,7 +3,7 @@
     <Cast />
     <!-- <Media /> -->
     <Reviews />
-    <!-- <Recommend /> -->
+    <Recommend />
   </div>
 </template>
 
@@ -31,11 +31,11 @@ export default {
 <style lang="scss" scoped>
 .content {
   display: grid;
-  grid-template-rows: repeat(2, max-content);
+  grid-template-rows: repeat(3, max-content);
   grid-template-areas:
     "cast"
-    "reviews";
-  // "recommend";
+    "reviews"
+    "recommend";
   padding: 4rem;
   background-size: auto;
   overflow: hidden;

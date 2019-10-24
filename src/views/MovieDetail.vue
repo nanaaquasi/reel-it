@@ -38,7 +38,7 @@ export default {
   display: grid;
   position: relative;
   grid-template-columns: 1fr;
-  grid-template-rows: 10rem 1fr 1fr 10rem;
+  grid-template-rows: 10rem max-content 1fr 10rem;
   background-image: url(../assets/main_bg.png);
 
   @include respond(phone) {
