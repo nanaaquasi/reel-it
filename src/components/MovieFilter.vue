@@ -40,7 +40,7 @@ export default {
   name: "MovieFilter",
   data() {
     return {
-      year: [] | 2019,
+      year: [] | new Date().getFullYear(),
       sort: "Most Popular"
     };
   },
